@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{348B710C-7A8D-49B8-A278-004A6E572884}</ItemsProjectGuid>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <ItemsSccProjectName>$/Shared/Windows.Console</ItemsSccProjectName>
+    <ItemsSccAuxPath>https://svenbieg.visualstudio.com</ItemsSccAuxPath>
+    <ItemsSccLocalPath>.</ItemsSccLocalPath>
+    <ItemsSccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</ItemsSccProvider>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Console\Application.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Console\Console.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Console\Application.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Console\Console.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Console\Platform.h" />
+  </ItemGroup>
+</Project>
