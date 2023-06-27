@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Actors\Motor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Actors\Servo.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Actors\StepperMotor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Sensors\Temperature\DS18B20.cpp">
+      <Filter>Sensors\Temperature</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Sensors\Temperature\KTY-81-210.cpp">
+      <Filter>Sensors\Temperature</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Sensors\Temperature\Pt1000.cpp">
+      <Filter>Sensors\Temperature</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Sensors\Temperature\Thermometer.cpp">
+      <Filter>Sensors\Temperature</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Sensors\Climate\Bme280.cpp">
+      <Filter>Sensors\Climate</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Devices\Gpio\InputPin.cpp">
+      <Filter>Devices\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Devices\Gpio\OneWire.cpp">
+      <Filter>Devices\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Devices\Gpio\OneWireHelper.cpp">
+      <Filter>Devices\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Devices\Gpio\OutputPin.cpp">
+      <Filter>Devices\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Devices\Gpio\PwmPin.cpp">
+      <Filter>Devices\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Devices\Gpio\ImpulsePin.cpp">
+      <Filter>Devices\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Devices\Gpio\TouchPin.cpp">
+      <Filter>Devices\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Devices\Gpio\AnalogPin.cpp">
+      <Filter>Devices\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Devices\Gpio\GpioPin.cpp">
+      <Filter>Devices\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Physics\Energy.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Physics\Flow.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Physics\Humidity.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Physics\Power.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Physics\Pressure.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Physics\Temperature.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Emulation\Font.cpp">
+      <Filter>Graphics\Emulation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Emulation\RenderTarget.cpp">
+      <Filter>Graphics\Emulation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Emulation\Theme.cpp">
+      <Filter>Graphics\Emulation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Emulation\Fonts\SmallFont.cpp">
+      <Filter>Graphics\Emulation\Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Graphics\Emulation\Fonts\TinyFont.cpp">
+      <Filter>Graphics\Emulation\Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Math\DataRow.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Runtime\Shell.cpp">
+      <Filter>Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Runtime\ShellCommandList.cpp">
+      <Filter>Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Collections\Settings.cpp">
+      <Filter>Collections</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Actors\Motor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Actors\Servo.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Actors\StepperMotor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Sensors\Temperature\DS18B20.h">
+      <Filter>Sensors\Temperature</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Sensors\Temperature\KTY-81-210.h">
+      <Filter>Sensors\Temperature</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Sensors\Temperature\Pt1000.h">
+      <Filter>Sensors\Temperature</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Sensors\Temperature\Thermometer.h">
+      <Filter>Sensors\Temperature</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Sensors\Climate\Bme280.h">
+      <Filter>Sensors\Climate</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Devices\Gpio\InputPin.h">
+      <Filter>Devices\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Devices\Gpio\OneWire.h">
+      <Filter>Devices\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Devices\Gpio\OneWireHelper.h">
+      <Filter>Devices\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Devices\Gpio\OutputPin.h">
+      <Filter>Devices\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Devices\Gpio\PwmPin.h">
+      <Filter>Devices\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Devices\Gpio\ImpulsePin.h">
+      <Filter>Devices\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Devices\Gpio\TouchPin.h">
+      <Filter>Devices\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Devices\Gpio\AnalogPin.h">
+      <Filter>Devices\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Devices\Gpio\GpioPin.h">
+      <Filter>Devices\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Physics\Energy.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Physics\Flow.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Physics\Humidity.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Physics\Power.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Physics\Pressure.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Physics\Temperature.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Emulation\Brush.h">
+      <Filter>Graphics\Emulation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Emulation\Cursor.h">
+      <Filter>Graphics\Emulation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Emulation\Font.h">
+      <Filter>Graphics\Emulation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Emulation\RenderTarget.h">
+      <Filter>Graphics\Emulation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Emulation\Theme.h">
+      <Filter>Graphics\Emulation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Emulation\Fonts\SmallFont.h">
+      <Filter>Graphics\Emulation\Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Graphics\Emulation\Fonts\TinyFont.h">
+      <Filter>Graphics\Emulation\Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\Average.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\DataRow.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Runtime\Shell.h">
+      <Filter>Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Runtime\ShellCommandList.h">
+      <Filter>Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Settings.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Vector.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Devices">
+      <UniqueIdentifier>{a639b32b-6d37-4b5a-972f-b559353045b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actors">
+      <UniqueIdentifier>{80fdcdc0-1121-4ba4-9817-75c9c2609d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sensors">
+      <UniqueIdentifier>{8650eee1-e2be-4ec3-948f-d5e8d6e07b66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sensors\Temperature">
+      <UniqueIdentifier>{e1cf6cfd-fae2-474b-85a1-5b751f84c26a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sensors\Climate">
+      <UniqueIdentifier>{aab0bf69-b263-4385-8146-936126003add}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Devices\Gpio">
+      <UniqueIdentifier>{4a4bcb90-9d8f-4b7d-8bd5-7067af2ef0b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{efdacbdf-fb81-42f3-94ec-f5aab2719a6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{e870b9c9-62fa-4fe9-8c75-d610d88ae985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Emulation">
+      <UniqueIdentifier>{be121354-f419-439b-a658-14267d569a6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Emulation\Fonts">
+      <UniqueIdentifier>{667da31e-9955-4284-83f7-f32ba27c656f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{49427ef8-5a0e-4176-8884-135e660679fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Runtime">
+      <UniqueIdentifier>{44b8c1b2-169c-4496-ab88-224580e8cb29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collections">
+      <UniqueIdentifier>{f2afa600-dc99-49ae-9015-def0c88cae62}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
