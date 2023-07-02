@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(SolutionDir)FreeRTOS\Configuration\Tools.targets" />
+  <Import Project="Tools.targets" />
   <Target Name="CheckComPort">
     <Exec Command="mode $(ComPort) &gt; nul" IgnoreExitCode="true">
       <Output PropertyName="CheckComPortExitCode" TaskParameter="ExitCode" />

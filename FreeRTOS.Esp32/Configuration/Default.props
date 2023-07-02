@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(SolutionDir)Espressif\Configuration\Default.props" />
+  <ItemGroup>
+    <PreprocessorList Condition="'$(Configuration)'=='Debug'" Include="_DEBUG" />
+    <PreprocessorList Condition="'$(Configuration)'=='Release'" Include="NDEBUG" />
+  </ItemGroup>
   <PropertyGroup>
+    <!-- Version -->
+    <Timestamp>$([System.DateTime]::Now.ToString("yyyy-MM-dd HH:mm:ss"))</Timestamp>
+    <!-- Settings -->
+    <ComPort>COM4</ComPort>
+    <HomePath>$(HOMEDRIVE)$(HOMEPATH)\</HomePath>
     <!-- Directories -->
     <CMakePath>$(HomePath).espressif\tools\cmake\3.24.0\</CMakePath>
     <CompilerPath>$(HomePath).espressif\tools\xtensa-esp32-elf\esp-12.2.0_20230208\xtensa-esp32-elf\</CompilerPath>
     <EspPath>$(HomePath).espressif\</EspPath>
+    <GitPath>C:\Program Files\Git\cmd\</GitPath>
     <IdfPath>$(HomePath).espressif\esp-idf\</IdfPath>
     <IdfExtraComponentDir>FreeRTOS.Esp32\Components</IdfExtraComponentDir>
     <IdfToolsPath>$(HomePath).espressif\tools\</IdfToolsPath>
     <IdfPyPath>$(HomePath).espressif\tools\idf-exe\1.0.3\</IdfPyPath>
     <NinjaPath>$(HomePath).espressif\tools\ninja\1.10.2\</NinjaPath>
     <PythonEnvPath>$(HomePath).espressif\python_env\idf5.1_py3.8_env\</PythonEnvPath>
+    <PythonPath>$(HomePath)AppData\Local\Programs\Python\Python38\</PythonPath>
     <!-- Tools -->
+    <GitExe>$(GitPath)git.exe</GitExe>
     <IdfPyExe>$(IdfPyPath)idf.py.exe</IdfPyExe>
+    <PythonExe>$(PythonPath)python.exe</PythonExe>
     <!-- Compiler -->
     <IdfInclude>@(IdfIncludeList)</IdfInclude>
     <IncludePath>@(IdfIncludeList)</IncludePath>
