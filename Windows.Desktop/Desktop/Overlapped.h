@@ -12,6 +12,7 @@
 #include "Graphics/Direct2D/Icon.h"
 #include "Resources/Icons/Icon.h"
 #include "Frame.h"
+#include "Sentence.h"
 
 
 //===========

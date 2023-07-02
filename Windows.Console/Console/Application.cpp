@@ -46,7 +46,7 @@ INT main()
 SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
 MainThreadId=GetCurrentThreadId();
 SetConsoleCtrlHandler(ConsoleCallback, true);
-new CommandLine(GetCommandLine());
+new CommandLine(GetCommandLineA());
 Initialize();
 INT status=0;
 auto app=Console::Application::Current;

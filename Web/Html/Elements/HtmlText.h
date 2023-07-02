@@ -10,6 +10,7 @@
 //=======
 
 #include "HtmlElement.h"
+#include "Sentence.h"
 
 
 //===========

@@ -12,6 +12,7 @@
 #include "Core/Timer.h"
 #include "UI/Controls/Interactive.h"
 #include "UI/Controls/Panel.h"
+#include "Sentence.h"
 
 
 //===========

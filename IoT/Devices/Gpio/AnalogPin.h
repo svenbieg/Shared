@@ -10,6 +10,7 @@
 //=======
 
 #include "Math/Average.h"
+#include "FloatClass.h"
 #include "GpioPin.h"
 
 

@@ -44,7 +44,7 @@ public:
 
 protected:
 	// Con-/Destructors
-	Application(Handle<Sentence> Name, LPCSTR Version="1.0");
+	Application(LPCSTR Name, LPCSTR Version="1.0");
 
 	// Common
 	Input* GetInputControl();

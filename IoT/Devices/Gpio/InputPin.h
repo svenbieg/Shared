@@ -9,6 +9,7 @@
 // Using
 //=======
 
+#include "BoolClass.h"
 #include "GpioPin.h"
 
 

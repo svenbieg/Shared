@@ -14,6 +14,7 @@
 #include "Storage/Streams/StringWriter.h"
 #include "Shell.h"
 #include "ShellCommandList.h"
+#include "StringVariable.h"
 
 using namespace Core;
 using namespace Storage::Streams;

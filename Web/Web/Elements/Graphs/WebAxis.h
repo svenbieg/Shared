@@ -10,6 +10,7 @@
 //=======
 
 #include "Collections/Map.h"
+#include "Sentence.h"
 
 
 //===========

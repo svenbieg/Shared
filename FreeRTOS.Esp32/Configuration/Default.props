@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(SolutionDir)Espressif\Configuration\Default.props" />
+  <PropertyGroup>
+    <!-- Directories -->
+    <CMakePath>$(HomePath).espressif\tools\cmake\3.24.0\</CMakePath>
+    <CompilerPath>$(HomePath).espressif\tools\xtensa-esp32-elf\esp-12.2.0_20230208\xtensa-esp32-elf\</CompilerPath>
+    <EspPath>$(HomePath).espressif\</EspPath>
+    <IdfPath>$(HomePath).espressif\esp-idf\</IdfPath>
+    <IdfExtraComponentDir>FreeRTOS.Esp32\Components</IdfExtraComponentDir>
+    <IdfToolsPath>$(HomePath).espressif\tools\</IdfToolsPath>
+    <IdfPyPath>$(HomePath).espressif\tools\idf-exe\1.0.3\</IdfPyPath>
+    <NinjaPath>$(HomePath).espressif\tools\ninja\1.10.2\</NinjaPath>
+    <PythonEnvPath>$(HomePath).espressif\python_env\idf5.1_py3.8_env\</PythonEnvPath>
+    <!-- Tools -->
+    <IdfPyExe>$(IdfPyPath)idf.py.exe</IdfPyExe>
+    <!-- Compiler -->
+    <IdfInclude>@(IdfIncludeList)</IdfInclude>
+    <IncludePath>@(IdfIncludeList)</IncludePath>
+    <NMakeBuildCommandLine>msbuild.exe -t:EspFlash -p:Configuration="$(Configuration)" -p:Platform="$(Platform)" -p:SolutionDir="$(ProjectDir)..\\" -nologo -p:ComPort="$(ComPort)" -v:m $(ProjectFileName)</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>msbuild.exe -t:EspClean -p:Configuration="$(Configuration)" -p:Platform="$(Platform)" -p:SolutionDir="$(ProjectDir)..\\" -nologo -v:q $(ProjectFileName)</NMakeCleanCommandLine>
+    <NMakeForcedIncludes>$(SolutionDir)FreeRTOS\IntelliSense.h</NMakeForcedIncludes>
+    <NMakeIncludeSearchPath>$(SolutionDir)build\config</NMakeIncludeSearchPath>
+    <NMakePreprocessorDefinitions>@(PreprocessorList);$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <!-- Settings -->
+    <ComPortBaud>115200</ComPortBaud>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Preprocessor -->
+    <PreprocessorList Include="ESP32;ESP_PLATFORM;MULTI_HEAP_FREERTOS" />
+    <!-- Include -->
+    <IdfIncludeList Include="$(VC_IncludePath)" />
+    <IdfIncludeList Include="$(IdfPath)components\app_update\include" />
+    <IdfIncludeList Include="$(IdfPath)components\bootloader_support\include" />
+    <IdfIncludeList Include="$(IdfPath)components\driver\esp32\include" />
+    <IdfIncludeList Include="$(IdfPath)components\driver\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp32\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_adc\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_app_format\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_common\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_event\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_hw_support\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_netif\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_partition\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_ringbuf\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_rom\include\esp32" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_rom\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_system\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_timer\include" />
+    <IdfIncludeList Include="$(IdfPath)components\esp_wifi\include" />
+    <IdfIncludeList Include="$(IdfPath)components\freertos\FreeRTOS-Kernel\include" />
+    <IdfIncludeList Include="$(IdfPath)components\freertos\FreeRTOS-Kernel\portable\xtensa\include" />
+    <IdfIncludeList Include="$(IdfPath)components\freertos\esp_additions\include" />
+    <IdfIncludeList Include="$(IdfPath)components\hal\include" />
+    <!--<IdfIncludeList Include="$(IdfPath)components\heap\include" />-->
+    <IdfIncludeList Include="$(IdfPath)components\log\include" />
+    <IdfIncludeList Include="$(IdfPath)components\lwip\include\apps\dhcpserver" />
+    <IdfIncludeList Include="$(IdfPath)components\lwip\include\apps\ping" />
+    <IdfIncludeList Include="$(IdfPath)components\lwip\include\apps\sntp" />
+    <IdfIncludeList Include="$(IdfPath)components\lwip\include\apps" />
+    <IdfIncludeList Include="$(IdfPath)components\lwip\lwip\src\include" />
+    <IdfIncludeList Include="$(IdfPath)components\lwip\port\esp32\include" />
+    <IdfIncludeList Include="$(IdfPath)components\mbedtls\mbedtls\include" />
+    <IdfIncludeList Include="$(IdfPath)components\mbedtls\port\include" />
+    <IdfIncludeList Include="$(IdfPath)components\mbedtls\port\include\esp32" />
+    <IdfIncludeList Include="$(IdfPath)components\newlib\platform_include" />
+    <IdfIncludeList Include="$(IdfPath)components\nvs_flash\include" />
+    <IdfIncludeList Include="$(IdfPath)components\soc\include" />
+    <IdfIncludeList Include="$(IdfPath)components\soc\esp32\include" />
+    <IdfIncludeList Include="$(IdfPath)components\spi_flash\include" />
+    <IdfIncludeList Include="$(IdfPath)components\xtensa\esp32\include" />
+    <!--<IdfIncludeList Include="$(IdfPath)components\xtensa\include" />-->
+    <IdfIncludeList Include="$(SolutionDir)Esp32\Components\heap\include" />
+  </ItemGroup>
+</Project>

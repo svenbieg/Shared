@@ -11,6 +11,7 @@
 
 #include "Shell.h"
 #include "ShellCommandList.h"
+#include "Variable.h"
 
 
 //===========

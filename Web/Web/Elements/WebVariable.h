@@ -9,6 +9,7 @@
 // Using
 //=======
 
+#include "Variable.h"
 #include "WebControl.h"
 
 

@@ -13,6 +13,7 @@
 #include "Devices/Clock.h"
 #include "Resources/Strings/Days.h"
 #include "Resources/Strings/Months.h"
+#include "Sentence.h"
 #include "TimePoint.h"
 
 using namespace Devices;

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PreprocessorList Condition="'$(Configuration)'=='Debug'" Include="_DEBUG" />
+    <PreprocessorList Condition="'$(Configuration)'=='Release'" Include="NDEBUG" />
+  </ItemGroup>
+  <PropertyGroup>
+    <!-- Settings -->
+    <ComPort>COM4</ComPort>
+    <!-- Version -->
+    <Timestamp>$([System.DateTime]::Now.ToString("yyyy-MM-dd HH:mm:ss"))</Timestamp>
+    <!-- Directories -->
+    <HomePath>$(HOMEDRIVE)$(HOMEPATH)\</HomePath>
+    <GitPath>C:\Program Files\Git\cmd\</GitPath>
+    <PythonPath>$(HomePath)AppData\Local\Programs\Python\Python38\</PythonPath>
+    <!-- Tools -->
+    <GitExe>$(GitPath)git.exe</GitExe>
+    <PythonExe>$(PythonPath)python.exe</PythonExe>
+  </PropertyGroup>
+</Project>

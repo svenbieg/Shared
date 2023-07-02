@@ -10,6 +10,7 @@
 //=======
 
 #include "Clusters/index.hpp"
+#include "Sentence.h"
 #include "Variable.h"
 
 

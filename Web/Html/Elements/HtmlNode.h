@@ -12,6 +12,7 @@
 #include "Collections/List.h"
 #include "Collections/Map.h"
 #include "HtmlElement.h"
+#include "Sentence.h"
 
 
 //===========

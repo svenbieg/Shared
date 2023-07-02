@@ -14,6 +14,7 @@
 #include "UI/Controls/Interactive.h"
 #include "UI/Controls/TextBlock.h"
 #include "MenuItem.h"
+#include "Sentence.h"
 
 
 //===========

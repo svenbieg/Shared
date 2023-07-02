@@ -84,7 +84,7 @@ input->SelectAll();
 // Con-/Destructors Protected
 //============================
 
-Application::Application(Handle<Sentence> name, LPCSTR version):
+Application::Application(LPCSTR name, LPCSTR version):
 Core::Application(name, version),
 pFrame(nullptr)
 {

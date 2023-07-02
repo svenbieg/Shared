@@ -9,6 +9,7 @@
 // Using
 //=======
 
+#include "FloatClass.h"
 #include "GpioPin.h"
 
 

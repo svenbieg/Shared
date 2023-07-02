@@ -10,6 +10,7 @@
 //=======
 
 #include "GpioPin.h"
+#include "IntegerClasses.h"
 
 
 //===========
