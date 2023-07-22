@@ -72,6 +72,8 @@ info.offset=(size_t)heap+heap->used;
 info.size=size;
 info.free=false;
 heap->free_bytes-=size;
+if(heap->free_bytes<heap->minimum_free_bytes)
+	heap->minimum_free_bytes=heap->free_bytes;
 heap->used+=size;
 heap->allocated_blocks++;
 heap->total_blocks++;
@@ -84,6 +86,8 @@ heap_block_info_t info;
 if(!block_map_get_block(heap, &heap->map_free, size, &info))
 	return NULL;
 heap->free_bytes-=info.size;
+if(heap->free_bytes<heap->minimum_free_bytes)
+	heap->minimum_free_bytes=heap->free_bytes;
 heap->allocated_blocks++;
 heap->free_blocks--;
 size_t free_size=info.size-size;
@@ -325,7 +329,11 @@ if(heap==NULL)
 MULTI_HEAP_LOCK(heap->lock);
 info->total_free_bytes=heap->free_bytes;
 info->total_allocated_bytes=heap->size;
-info->largest_free_block=heap->size-heap->used;
+size_t largest=block_map_get_last_size(heap, &heap->map_free);
+size_t unused=heap->size-heap->used;
+if(unused>largest)
+	largest=unused;
+info->largest_free_block=largest;
 info->minimum_free_bytes=heap->minimum_free_bytes;
 info->allocated_blocks=heap->allocated_blocks;
 info->free_blocks=heap->free_blocks;

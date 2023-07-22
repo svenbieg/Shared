@@ -732,6 +732,13 @@ if(block_map_group_get_block(heap, map->root, min_size, info))
 return false;
 }
 
+size_t block_map_get_last_size(multi_heap_handle_t heap, block_map_t* map)
+{
+if(!map->root)
+	return 0;
+return block_map_group_get_last_size(map->root);
+}
+
 bool block_map_lift_root(multi_heap_handle_t heap, block_map_t* map)
 {
 block_map_parent_group_t* root=block_map_parent_group_create_with_child(heap, map->root);

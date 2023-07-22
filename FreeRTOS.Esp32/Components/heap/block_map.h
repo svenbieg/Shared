@@ -153,6 +153,7 @@ return cluster_group_get_item_count((cluster_group_t*)map->root);
 bool block_map_add_block(multi_heap_handle_t heap, block_map_t* map, heap_block_info_t const* info);
 bool block_map_drop_root(multi_heap_handle_t heap, block_map_t* map);
 bool block_map_get_block(multi_heap_handle_t heap, block_map_t* map, size_t min_size, heap_block_info_t* info);
+size_t block_map_get_last_size(multi_heap_handle_t heap, block_map_t* map);
 bool block_map_lift_root(multi_heap_handle_t heap, block_map_t* map);
 void block_map_remove_block(multi_heap_handle_t heap, block_map_t* map, heap_block_info_t const* info);
 
