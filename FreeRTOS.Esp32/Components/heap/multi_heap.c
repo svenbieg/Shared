@@ -73,6 +73,8 @@ info.size=size;
 info.free=false;
 heap->free_bytes-=size;
 heap->used+=size;
+heap->allocated_blocks++;
+heap->total_blocks++;
 return heap_block_init(heap, &info);
 }
 
@@ -82,6 +84,8 @@ heap_block_info_t info;
 if(!block_map_get_block(heap, &heap->map_free, size, &info))
 	return NULL;
 heap->free_bytes-=info.size;
+heap->allocated_blocks++;
+heap->free_blocks--;
 size_t free_size=info.size-size;
 if(free_size>=BLOCK_SIZE_MIN)
 	{
@@ -113,11 +117,14 @@ if(info.previous.free)
 	size+=info.previous.size;
 	block_map_remove_block(heap, &heap->map_free, &info.previous);
 	heap->free_bytes-=info.previous.size;
+	heap->free_blocks--;
+	heap->total_blocks--;
 	}
 if(!info.next.offset)
 	{
 	heap->free_bytes+=size;
 	heap->used-=size;
+	heap->total_blocks--;
 	return;
 	}
 if(info.next.free)
@@ -125,8 +132,12 @@ if(info.next.free)
 	size+=info.next.size;
 	block_map_remove_block(heap, &heap->map_free, &info.next);
 	heap->free_bytes-=info.next.size;
+	heap->free_blocks--;
+	heap->total_blocks--;
 	}
 heap->free_bytes+=size;
+heap->allocated_blocks--;
+heap->free_blocks++;
 info.current.offset=offset;
 info.current.size=size;
 info.current.free=true;
