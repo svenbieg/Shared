@@ -1,16 +1,8 @@
-// Copyright 2015-2016 Espressif Systems (Shanghai) PTE LTD
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-
-//	 http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*
+ * SPDX-FileCopyrightText: 2015-2022 Espressif Systems (Shanghai) CO LTD
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
 // This file was modified
 // Copyright 2023, Sven Bieg (svenbieg@web.de)
@@ -29,39 +21,6 @@
 //=========
 // Private
 //=========
-
-void* multi_heap_alloc_from_cache(multi_heap_handle_t heap, size_t size)
-{
-size_t free_block=heap->free_block;
-size_t* prev_ptr=&heap->free_block;
-while(free_block)
-	{
-	size_t* buf=(size_t*)heap_block_get_pointer(free_block);
-	size_t next_free=*buf;
-	heap_block_info_t info;
-	heap_block_get_info(heap, buf, &info);
-	if(info.size==size)
-		{
-		*prev_ptr=next_free;
-		return buf;
-		}
-	if(info.size>=size+BLOCK_SIZE_MIN)
-		{
-		heap_block_info_t free_info;
-		free_info.offset=free_block+size;
-		free_info.size=info.size-size;
-		free_info.free=false;
-		size_t* free_body=(size_t*)heap_block_init(heap, &free_info);
-		*free_body=next_free;
-		*prev_ptr=free_info.offset;
-		info.size=size;
-		return heap_block_init(heap, &info);
-		}
-	prev_ptr=buf;
-	free_block=next_free;
-	}
-return NULL;
-}
 
 void* multi_heap_alloc_from_foot(multi_heap_handle_t heap, size_t size)
 {
@@ -98,6 +57,8 @@ if(free_size>=BLOCK_SIZE_MIN)
 	free_info.size=free_size;
 	free_info.free=false;
 	void* free_buf=heap_block_init(heap, &free_info);
+	heap->total_blocks++;
+	heap->allocated_blocks++;
 	multi_heap_free_to_cache(heap, free_buf);
 	info.size=size;
 	}
@@ -128,6 +89,7 @@ if(!info.next.offset)
 	{
 	heap->free_bytes+=size;
 	heap->used-=size;
+	heap->allocated_blocks--;
 	heap->total_blocks--;
 	return;
 	}
@@ -169,10 +131,7 @@ while(free_block)
 void* multi_heap_alloc_internal(multi_heap_handle_t heap, size_t size)
 {
 size=heap_block_calc_size(size);
-void* p=multi_heap_alloc_from_cache(heap, size);
-if(p)
-	return p;
-p=multi_heap_alloc_from_map(heap, size);
+void* p=multi_heap_alloc_from_map(heap, size);
 if(p)
 	return p;
 return multi_heap_alloc_from_foot(heap, size);
