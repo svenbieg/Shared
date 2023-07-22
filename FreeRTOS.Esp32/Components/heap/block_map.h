@@ -18,6 +18,7 @@
 
 #include "cluster_group.h"
 #include "heap_block.h"
+#include "offset_index.h"
 
 
 //======
@@ -32,9 +33,10 @@ union
 	struct
 		{
 		size_t offset: SIZE_BITS-1;
-		size_t index: 1;
+		size_t single: 1;
 		};
 	size_t entry;
+	offset_index_t index;
 	};
 }block_map_item_t;
 
@@ -114,7 +116,7 @@ bool block_map_parent_group_add_block(multi_heap_handle_t heap, block_map_parent
 bool block_map_parent_group_add_block_internal(multi_heap_handle_t heap, block_map_parent_group_t* group, heap_block_info_t const* info, bool again);
 void block_map_parent_group_append_groups(block_map_parent_group_t* group, block_map_group_t* const* append, uint16_t count);
 bool block_map_parent_group_combine_child(multi_heap_handle_t heap, block_map_parent_group_t* group, uint16_t pos);
-bool block_map_parent_group_combine_children(multi_heap_handle_t heap, block_map_parent_group_t* group);
+void block_map_parent_group_combine_children(multi_heap_handle_t heap, block_map_parent_group_t* group);
 bool block_map_parent_group_get_block(multi_heap_handle_t heap, block_map_parent_group_t* group, size_t min_size, heap_block_info_t* info, bool passive);
 void block_map_parent_group_insert_groups(block_map_parent_group_t* group, uint16_t at, block_map_group_t* const* insert, uint16_t count);
 void block_map_parent_group_move_children(block_map_parent_group_t* group, uint16_t from, uint16_t to, uint16_t count);

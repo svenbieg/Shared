@@ -27,8 +27,8 @@ typedef struct
 {
 cluster_group_t header;
 size_t item_count;
-void* first;
-void* last;
+size_t first;
+size_t last;
 cluster_group_t* children[CONFIG_CLUSTER_GROUP_SIZE];
 }parent_group_t;
 

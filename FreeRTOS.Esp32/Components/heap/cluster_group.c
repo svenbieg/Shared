@@ -20,6 +20,8 @@
 
 size_t cluster_group_get_item_count(cluster_group_t* group)
 {
+if(!group)
+	return 0;
 cluster_group_t get;
 get.value=group->value;
 if(get.level==0)
