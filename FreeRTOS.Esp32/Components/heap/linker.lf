@@ -1,0 +1,9 @@
+[mapping:heap]
+archive: libheap.a
+entries:
+    block_map (noflash)
+    cluster_group (noflash)
+    heap_block (noflash)
+    multi_heap (noflash)
+    offset_index (noflash)
+    parent_group (noflash)
