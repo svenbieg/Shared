@@ -21,7 +21,6 @@ typedef UINT FILE_SIZE;
 //======================
 
 #include "ErrorHelper.h"
-#include "TimeHelper.h"
 
 
 //=======
