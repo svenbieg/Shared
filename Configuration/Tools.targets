@@ -1,0 +1,6 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="GitInstall" Condition="!Exists($(GitExe))">
+    <Message Text="Installing Git..." Importance="High" />
+    <Exec Command="winget install --id Git.Git -e --source winget" />
+  </Target>
+</Project>

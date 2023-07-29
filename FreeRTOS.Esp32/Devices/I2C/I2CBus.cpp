@@ -29,11 +29,7 @@ I2CBus::I2CBus(BYTE sda, BYTE scl):
 pCommand(nullptr)
 {
 Current=this;
-esp_err_t status=i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER
-#ifdef ESP32
-, 0, 0, 0
-#endif
-);
+esp_err_t status=i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0);
 if(status!=ESP_OK)
 	{
 	DebugPrint("i2c_driver_install failed (%u)\n", status);

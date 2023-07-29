@@ -31,6 +31,7 @@ extern VOID Initialize();
 
 extern "C" VOID app_main()
 {
+DebugPrint("app_main()\n");
 setenv("TZ", "CET-1CEST,M3.5.0,M10.5.0/3", true);
 tzset();
 auto clock=Clock::Get();

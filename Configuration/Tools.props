@@ -1,0 +1,10 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Directories -->
+    <GitPath>C:\Program Files\Git\cmd\</GitPath>
+    <NinjaPath>$(VSAPPIDDIR)CommonExtensions\Microsoft\CMake\Ninja\</NinjaPath>
+    <!-- Tools -->
+    <GitExe>$(GitPath)git.exe</GitExe>
+    <NinjaExe>$(NinjaPath)ninja.exe</NinjaExe>
+  </PropertyGroup>
+</Project>

@@ -91,13 +91,21 @@ inline static void multi_heap_assert(bool condition, const char *format, const c
 #define MULTI_HEAP_LOCK_INIT(PLOCK)  (void) (PLOCK)
 #define MULTI_HEAP_LOCK_STATIC_INITIALIZER  0
 
-#define MULTI_HEAP_ASSERT(CONDITION, ADDRESS) assert((CONDITION) && "Heap corrupt")
+#define MULTI_HEAP_ASSERT(CONDITION) assert(CONDITION)
 
 #define MULTI_HEAP_BLOCK_OWNER
 #define MULTI_HEAP_SET_BLOCK_OWNER(HEAD)
 #define MULTI_HEAP_GET_BLOCK_OWNER(HEAD) (NULL)
 
 #endif // MULTI_HEAP_FREERTOS
+
+
+//=======
+// Using
+//=======
+
+#include <multi_heap.h>
+#include <stdbool.h>
 
 
 //===========

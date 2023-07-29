@@ -1,0 +1,36 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="CheckComPort">
+    <Exec Command="mode $(ComPort) &gt; nul" IgnoreExitCode="true">
+      <Output PropertyName="CheckComPortExitCode" TaskParameter="ExitCode" />
+    </Exec>
+    <PropertyGroup>
+      <ComPortPresent Condition="'$(CheckComPortExitCode)'=='0'">true</ComPortPresent>
+    </PropertyGroup>
+  </Target>
+  <Target Name="PythonInstall" Condition="!Exists('$(PythonExe)')">
+    <Message Text="Installing Python..." Importance="High" />
+    <Exec Command="winget install -e --id Python.Python.3.8" />
+  </Target>
+  <Target Name="IdfInstall" Condition="!Exists('$(IdfPath)')" DependsOnTargets="GitInstall">
+    <Message Text="Downloading Esp-Idf..." Importance="High" />
+    <MakeDir Directories="$(HomePath).espressif" Condition="!Exists('$(HomePath).espressif')" />
+    <Exec Command="%22$(GitExe)%22 clone --recursive https://github.com/espressif/esp-idf.git" WorkingDirectory="$(HomePath).espressif" />
+  </Target>
+  <Target Name="IdfToolsInstall" Condition="!Exists('$(CompilerPath)')" DependsOnTargets="PythonInstall;IdfInstall">
+    <Message Text="Installing Idf-Tools..." Importance="High" />
+    <ItemGroup>
+      <SetupLines Include="@echo off" />
+      <SetupLines Include="set PATH=%%PATH%%%3B$(PythonPath)%3B$(GitPath)" />
+      <SetupLines Include="set IDF_PATH=$(IdfPath)" />
+      <SetupLines Include="$(PythonExe) -m pip install --upgrade pip" />
+      <SetupLines Include="$(PythonExe) tools\idf_tools.py install" />
+      <SetupLines Include="$(PythonExe) tools\idf_tools.py install-python-env" />
+      <SetupLines Include="$(PythonExe) -m pip install --user -r tools\requirements\requirements.core.txt" />
+    </ItemGroup>
+    <Exec Command="@(SetupLines->'%(Identity)&amp;')" WorkingDirectory="$(IdfPath)" />
+  </Target>
+  <Target Name="MakeImage" DependsOnTargets="IdfToolsInstall;NinjaSetup;NinjaBuild">
+    <Exec Command="$(PythonExe) -m esptool $(MakeImageArgs)" WorkingDirectory="$(OutDir)"/>
+  </Target>
+  <Target Name="Build" DependsOnTargets="MakeImage" />
+</Project>

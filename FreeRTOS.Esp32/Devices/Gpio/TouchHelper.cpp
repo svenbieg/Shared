@@ -9,7 +9,7 @@
 // Using
 //=======
 
-#include <driver/touch_pad.h>
+#include <driver/touch_sensor.h>
 #include "TouchHelper.h"
 
 
@@ -91,26 +91,26 @@ if(TouchPadCount++==0)
 	touch_pad_set_voltage(TOUCH_HVOLT_2V7, TOUCH_LVOLT_0V5, TOUCH_HVOLT_ATTEN_1V);
 	touch_pad_set_fsm_mode(TOUCH_FSM_MODE_TIMER);
 	}
-touch_pad_config(touch_pad, 0);
+touch_pad_config(touch_pad);
 return true;
 }
 
-WORD TouchRead(BYTE pin)
+UINT TouchRead(BYTE pin)
 {
 touch_pad_t touch_pad=GetTouchPad(pin);
 if(touch_pad==TOUCH_PAD_MAX)
 	return 0;
-WORD value=0;
-touch_pad_read(touch_pad, &value);
+UINT value=0;
+touch_pad_read_raw_data(touch_pad, &value);
 return value;
 }
 
-VOID TouchTreshold(BYTE pin, WORD treshold)
+VOID TouchTreshold(BYTE pin, UINT treshold)
 {
 touch_pad_t touch_pad=GetTouchPad(pin);
 if(touch_pad==TOUCH_PAD_MAX)
 	return;
-touch_pad_config(touch_pad, treshold);
+touch_pad_set_thresh(touch_pad, treshold);
 }
 
 }}

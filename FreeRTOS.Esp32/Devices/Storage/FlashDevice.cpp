@@ -115,16 +115,12 @@ FlashDevice::FlashDevice():
 uOffset(0),
 uSize(0)
 {
-#ifdef ESP32
 UINT size=0;
 if(esp_flash_get_size(esp_flash_default_chip, &size)!=ESP_OK)
 	{
 	DebugPrint("esp_flash_get_size() failed\n");
 	return;
 	}
-#else
-UINT usize=spi_flash_get_chip_size();
-#endif
 esp_partition_iterator_t it=esp_partition_find(ESP_PARTITION_TYPE_APP, ESP_PARTITION_SUBTYPE_ANY, nullptr);
 esp_partition_t const* plast=nullptr;
 while(it)

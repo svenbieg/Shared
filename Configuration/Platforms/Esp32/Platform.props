@@ -1,0 +1,32 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Settings -->
+    <ComPort>COM3</ComPort>
+    <ComPortBaud>115200</ComPortBaud>
+    <!-- Directories -->
+    <EspPath>$(HomePath).espressif\</EspPath>
+    <IdfPath>$(EspPath)esp-idf\</IdfPath>
+    <IdfPyPath>$(HomePath).espressif\tools\idf-exe\1.0.3\</IdfPyPath>
+    <IdfToolsPath>$(EspPath)tools\</IdfToolsPath>
+    <CMakePath>$(IdfToolsPath)cmake\3.24.0\</CMakePath>
+    <PythonEnvPath>$(EspPath)python_env\idf5.1_py3.8_env\</PythonEnvPath>
+    <PythonPath>$(HomePath)AppData\Local\Programs\Python\Python38\</PythonPath>
+    <!-- Tools -->
+    <IdfPyExe>$(IdfPyPath)idf.py.exe</IdfPyExe>
+    <PythonExe>$(PythonPath)python.exe</PythonExe>
+    <!-- Compiler -->
+    <AdditionalLinkerFlags>-Wl,--gc-sections</AdditionalLinkerFlags>
+    <!--<CompilerFlags>$(CompilerFlags) -mlongcalls -mtext-section-literals -mabi=windowed</CompilerFlags>-->
+    <CompilerFlags>$(CompilerFlags) -Wno-multichar</CompilerFlags>
+    <CompilerPath>$(IdfToolsPath)xtensa-esp32s3-elf\esp-12.2.0_20230208\xtensa-esp32s3-elf\</CompilerPath>
+    <CompilerPrefix>xtensa-esp32s3-elf-</CompilerPrefix>
+    <FlashArgs>--port $(ComPort) --chip esp32s3 write_flash --flash_freq 40m --flash_mode dio</FlashArgs>
+    <IncludePath>$(IncludePath);$(CompilerPath)xtensa-esp32s3-elf\include</IncludePath>
+    <IncludePath>$(IncludePath);$(CompilerPath)lib\gcc\xtensa-esp32s3-elf\12.2.0\include</IncludePath>
+    <LinkerFlags>$(LinkerFlags) -mlongcalls -mtext-section-literals -mabi=windowed</LinkerFlags>
+    <LinkerFlags>$(LinkerFlags) -T $(IdfPath)components\esp_rom\esp32s3\ld\esp32s3.rom.ld</LinkerFlags>
+    <LinkerFlags>$(LinkerFlags) -T $(IdfPath)components\esp_rom\esp32s3\ld\esp32s3.rom.newlib.ld</LinkerFlags>
+    <NMakePreprocessorDefinitions>__XTENSA__;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeForcedIncludes>$(MsBuildThisFileDirectory)IntelliSense.h</NMakeForcedIncludes>
+  </PropertyGroup>
+</Project>

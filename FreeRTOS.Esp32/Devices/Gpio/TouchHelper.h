@@ -19,7 +19,7 @@ namespace Devices {
 
 VOID TouchClose(BYTE Pin);
 BOOL TouchInit(BYTE Pin);
-WORD TouchRead(BYTE Pin);
-VOID TouchTreshold(BYTE Pin, WORD Treshold);
+UINT TouchRead(BYTE Pin);
+VOID TouchTreshold(BYTE Pin, UINT Treshold);
 
 }}

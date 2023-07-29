@@ -1,0 +1,18 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="DownloadCompiler" Condition="!Exists('$(TEMP)\arm-gnu-toolchain-12.2.rel1-mingw-w64-i686-aarch64-none-elf.zip')">
+    <Message Text="Downloading Compiler..." Importance="High" />
+    <DownloadFile SourceUrl="https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-mingw-w64-i686-aarch64-none-elf.zip" DestinationFolder="$(TEMP)" />
+  </Target>
+  <Target Name="InstallCompiler" Condition="!Exists('$(CompilerPath)')" DependsOnTargets="DownloadCompiler">
+    <Message Text="Installing Compiler..." Importance="High" />
+    <Unzip SourceFiles="$(TEMP)\arm-gnu-toolchain-12.2.rel1-mingw-w64-i686-aarch64-none-elf.zip" DestinationFolder="$(HomePath)gcc" />
+  </Target>
+  <Target Name="MakeImage">
+    <ItemGroup>
+      <MakeImageLines Include="set PATH=%%PATH%%%3B$(CompilerPath)bin" />
+      <MakeImageLines Include="$(CompilerPrefix)objcopy -O binary $(OutputFileName).elf $(OutputFileName)$(OutputFileExt)" />
+    </ItemGroup>
+    <Exec Command="@(MakeImageLines->'%(Identity)&amp;')" WorkingDirectory="$(OutDir)" />
+  </Target>
+  <Target Name="Build" DependsOnTargets="MakeImage" />
+</Project>

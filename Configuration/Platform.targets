@@ -1,0 +1,73 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="Platforms\$(Platform)\Platform.targets" />
+  <Import Project="Tools.targets" />
+  <Target Name="NinjaSetup">
+    <ItemGroup>
+      <IncludeListUnfiltered Include="$(IncludePath)" />
+      <IncludeListUnfiltered Include="%(ClCompile.AdditionalIncludeDirectories)" />
+      <LinkerScriptList Include="$(LinkerScripts)" />
+    </ItemGroup>
+    <RemoveDuplicates Inputs="@(IncludeListUnfiltered)">
+      <Output TaskParameter="Filtered" ItemName="IncludeList" />
+    </RemoveDuplicates>
+    <ItemGroup>
+      <PreprocessorList Include="$(NMakePreprocessorDefinitions)" />
+      <SourceList Include="@(ClCompile)">
+        <InputFileName>$([System.String]::Copy('%(FullPath)').Replace(':', '$:'))</InputFileName>
+        <OutputFileName>%(Directory)%(FileName).o</OutputFileName>
+      </SourceList>
+      <ScriptList Include="@(LinkerScriptList)">
+        <InputFileName>$([System.String]::Copy('%(FullPath)').Replace(':', '$:'))</InputFileName>
+        <OutputFileName>%(Directory)%(FileName)</OutputFileName>
+      </ScriptList>
+    </ItemGroup>
+    <PropertyGroup>
+      <IncludeArg Condition="'@(IncludeList)'!=''">-I@(IncludeList->'%(Identity)', ' -I')</IncludeArg>
+      <PreprocessorArg Condition="'@(PreprocessorList)'!=''">-D@(PreprocessorList->'%(Identity)', ' -D')</PreprocessorArg>
+      <PreprocessorArg>$([System.String]::Copy('$(PreprocessorArg)').Replace('"', '\"'))</PreprocessorArg>
+      <ScriptArg Condition="'@(ScriptList)'!=''">-T@(ScriptList->'%(OutputFileName)', ' -T')</ScriptArg>
+      <NinjaCompile>@(SourceList->'build %(OutputFileName): cc %(InputFileName)', '%0D%0A')</NinjaCompile>
+      <NinjaScript>@(ScriptList->'build %(OutputFileName): ldc %(InputFileName)', '%0D%0A')</NinjaScript>
+      <NinjaLink>@(SourceList->'%(OutputFileName)', ' ')</NinjaLink>
+      <NinjaLink>$(NinjaLink) | @(ScriptList->'%(OutputFileName)', ' ')</NinjaLink>
+    </PropertyGroup>
+    <MakeDir Directories="$(OutDir)" />
+    <Copy SourceFiles="$(CopyToOutDir)" DestinationFolder="$(OutDir)" />
+  </Target>
+  <Target Name="NinjaBuild" Condition="'$(NinjaLink)'!=''" DependsOnTargets="NinjaSetup">
+    <ItemGroup>
+      <NinjaLines Include="%0D%0A" />
+      <NinjaLines Include="rule cc" />
+      <NinjaLines Include="%20%20depfile=$out.d" />
+      <NinjaLines Include="%20%20command=$(CompilerPrefix)gcc -MD -MF $out.d -c $(CompilerFlags) $(PreprocessorArg) $(IncludeArg) $in -o $out" />
+      <NinjaLines Include="%0D%0A" />
+      <NinjaLines Include="rule ldc" />
+      <NinjaLines Include="%20%20depfile=$out.d" />
+      <NinjaLines Include="%20%20command=$(CompilerPrefix)gcc -MD -MF $out.d -MT $out -E -P -x c $(PreprocessorArg) -o $out $in" />
+      <NinjaLines Include="%0D%0A" />
+      <NinjaLines Include="rule link" />
+      <NinjaLines Include="%20%20command=$(CompilerPrefix)gcc $(LinkerFlags) $(ScriptArg) -o $out $in $(AdditionalLinkerFlags)" />
+      <NinjaLines Include="%0D%0A" />
+      <NinjaLines Include="$(NinjaCompile)" />
+      <NinjaLines Include="$(NinjaScript)" />
+      <NinjaLines Include="build $(OutputFileName).elf: link $(NinjaLink)" />
+    </ItemGroup>
+    <WriteLinesToFile File="$(OutDir)build.ninja" Lines="@(NinjaLines)" Overwrite="true" />
+    <ItemGroup>
+      <BuildLines Include="set PATH=%%PATH%%%3B$(CompilerPath)bin%3B$(NinjaPath)" />
+      <BuildLines Include="ninja" />
+    </ItemGroup>
+    <Message Importance="high" Text="Compiling Project..." />
+    <Exec Command="@(BuildLines->'%(Identity)&amp;')" WorkingDirectory="$(OutDir)" />
+  </Target>
+  <Target Name="NMakeBuild" DependsOnTargets="NinjaSetup;NinjaBuild">
+  </Target>
+  <Target Name="NMakeClean">
+    <ItemGroup>
+      <CleanLines Include="rd /s /q Debug 2>nul" />
+      <CleanLines Include="rd /s /q Release 2>nul" />
+      <CleanLines Include="del CMakeLists.txt 2>nul" />
+    </ItemGroup>
+    <Exec Command="@(CleanLines->'%(Identity)&amp;')" WorkingDirectory="$(SolutionDir)" />
+  </Target>
+</Project>
