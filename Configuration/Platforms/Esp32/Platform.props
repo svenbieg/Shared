@@ -16,8 +16,7 @@
     <PythonExe>$(PythonPath)python.exe</PythonExe>
     <!-- Compiler -->
     <AdditionalLinkerFlags>-Wl,--gc-sections</AdditionalLinkerFlags>
-    <!--<CompilerFlags>$(CompilerFlags) -mlongcalls -mtext-section-literals -mabi=windowed</CompilerFlags>-->
-    <CompilerFlags>$(CompilerFlags) -Wno-multichar</CompilerFlags>
+    <CompilerFlags>$(CompilerFlags) -mlongcalls -mtext-section-literals -mabi=windowed</CompilerFlags>
     <CompilerPath>$(IdfToolsPath)xtensa-esp32s3-elf\esp-12.2.0_20230208\xtensa-esp32s3-elf\</CompilerPath>
     <CompilerPrefix>xtensa-esp32s3-elf-</CompilerPrefix>
     <FlashArgs>--port $(ComPort) --chip esp32s3 write_flash --flash_freq 40m --flash_mode dio</FlashArgs>
