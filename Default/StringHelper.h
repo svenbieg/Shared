@@ -54,15 +54,51 @@ UINT StringUpperCase(LPSTR Destination, UINT Size, LPCSTR String);
 // Formatting
 //============
 
-UINT StringVPrint(LPSTR Buffer, UINT Size, LPCSTR Format, VariableArguments& Arguments);
-UINT StringVPrint(LPWSTR Buffer, UINT Size, LPCSTR Format, VariableArguments& Arguments);
+enum class StringFormat
+{
+Char,
+Double,
+Float,
+Hex,
+Int,
+None,
+Percent,
+String,
+UInt
+};
 
-template <class _char_t, class _fmt_t, class... _args_t>
-inline UINT StringPrint(_char_t* String, UINT Size, _fmt_t const* Format, _args_t... Arguments)
+enum class StringFormatFlags: UINT
+{
+Left=1,
+None=0,
+Numeric=2,
+Precision=4,
+Signed=8,
+Space=16,
+Width=32,
+Zero=64
+};
+
+UINT StringGetFormat(LPCSTR String, StringFormat& Format, StringFormatFlags& Flags, UINT& Width, UINT& Precision);
+UINT StringPrintArgs(LPSTR Buffer, UINT Size, LPCSTR Format, VariableArguments const& Arguments);
+UINT StringPrintArgs(LPWSTR Buffer, UINT Size, LPCSTR Format, VariableArguments const& Arguments);
+UINT StringPrintDouble(LPSTR Buffer, UINT Size, DOUBLE Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0, UINT Precision=0);
+UINT StringPrintFloat(LPSTR Buffer, UINT Size, FLOAT Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0, UINT Precision=0);
+UINT StringPrintHex(LPSTR Buffer, UINT Size, UINT Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0);
+UINT StringPrintHex64(LPSTR Buffer, UINT Size, UINT64 Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0);
+UINT StringPrintInt(LPSTR Buffer, UINT Size, INT Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0);
+UINT StringPrintInt64(LPSTR Buffer, UINT Size, INT64 Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0);
+UINT StringPrintUInt(LPSTR Buffer, UINT Size, UINT Value);
+UINT StringPrintUInt64(LPSTR Buffer, UINT Size, UINT64 Value);
+UINT StringPrintUInt(LPSTR Buffer, UINT Size, UINT Value, StringFormatFlags Flags, UINT Width=0);
+UINT StringPrintUInt64(LPSTR Buffer, UINT Size, UINT64 Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0);
+
+template <class _char_t, class... _args_t>
+inline UINT StringPrint(_char_t* Buffer, UINT Size, LPCSTR Format, _args_t... Arguments)
 {
 UnknownClass args[]={ Arguments... };
 VariableArguments vargs(args, ARRAYSIZE(args));
-return StringVPrint(String, Size, Format, vargs);
+return StringPrintArgs(Buffer, Size, Format, vargs);
 }
 
 
@@ -70,15 +106,17 @@ return StringVPrint(String, Size, Format, vargs);
 // Scanning
 //==========
 
-UINT StringVScan(LPCSTR String, LPCSTR Format, VariableArguments& Arguments);
-UINT StringVScan(LPCWSTR String, LPCSTR Format, VariableArguments& Arguments);
+UINT StringScanArgs(LPCSTR String, LPCSTR Format, VariableArguments& Arguments);
+UINT StringScanArgs(LPCWSTR String, LPCSTR Format, VariableArguments& Arguments);
+UINT StringScanUInt(LPCSTR String, UINT* Value, bool Hex=false);
+UINT StringScanUInt(LPCWSTR String, UINT* Value, bool Hex=false);
 
 template <class _char_t, class... _args_t>
 inline UINT StringScan(_char_t const* String, LPCSTR Format, _args_t... Arguments)
 {
 UnknownClass args[]={ Arguments... };
 VariableArguments vargs(args, ARRAYSIZE(args));
-return StringVScan(String, Format, vargs);
+return StringScanArgs(String, Format, vargs);
 }
 
 

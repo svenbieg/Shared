@@ -9,7 +9,8 @@
 // Using
 //=======
 
-#include "CharHelper.h"
+#include "FlagHelper.h"
+#include "StringHelper.h"
 
 
 //===========
@@ -28,60 +29,34 @@ class StringWriter
 {
 public:
 	// Con-/Destructors
-	StringWriter(OutputStream* Stream):
-		pStream(nullptr),
-		pWriteAnsi(nullptr),
-		pWriteUnicode(nullptr)
-		{
-		SetStream(Stream);
-		}
+	StringWriter(OutputStream* Stream);
 
 	// Common
-	inline UINT Print(LPCSTR Value) { return DoPrint(pWriteAnsi, 0, Value); }
-	inline UINT Print(LPCWSTR Value) { return DoPrint(pWriteUnicode, 0, Value); }
-	inline UINT Print(UINT Length, LPCSTR Value) { return DoPrint(pWriteAnsi, Length, Value); }
-	inline UINT Print(UINT Length, LPCWSTR Value) { return DoPrint(pWriteUnicode, Length, Value); }
-	inline UINT Print(Handle<String> Value)
-		{
-		if(!Value)
-			return 0;
-		return Print(0, Value->Begin());
-		}
+	UINT Print(LPCSTR Value);
+	UINT Print(LPCSTR Value, StringFormatFlags Flags, UINT Width);
+	UINT Print(LPCWSTR Value);
+	UINT Print(LPCWSTR Value, StringFormatFlags Flags, UINT Width);
+	UINT Print(UINT Length, LPCSTR Value);
+	UINT Print(UINT Length, LPCWSTR Value);
+	UINT Print(Handle<String> Value);
+	UINT Print(LPCSTR Format, VariableArguments const& Arguments);
 	template <class... _args_t> UINT Print(LPCSTR Format, _args_t... Arguments)
 		{
-		Handle<String> str=new String(Format, Arguments...);
-		return Print(0, str->Begin());
+		UnknownClass args[]={ Arguments... };
+		VariableArguments vargs(args, ARRAYSIZE(args));
+		return Print(Format, vargs);
 		}
-	inline UINT PrintChar(CHAR Char, UINT Count=1) { return DoPrintChar(pWriteAnsi, Char, Count); }
-	inline UINT PrintChar(WCHAR Char, UINT Count=1) { return DoPrintChar(pWriteUnicode, Char, Count); }
-	VOID SetStream(OutputStream* Stream)
-		{
-		if(pStream==Stream)
-			return;
-		pStream=Stream;
-		auto format=pStream->GetFormat();
-		switch(format)
-			{
-			case StreamFormat::Ansi:
-				{
-				pWriteAnsi=AnsiWrite<CHAR>;
-				pWriteUnicode=AnsiWrite<WCHAR>;
-				break;
-				}
-			case StreamFormat::Unicode:
-				{
-				pWriteAnsi=UnicodeWrite<CHAR>;
-				pWriteUnicode=UnicodeWrite<WCHAR>;
-				break;
-				}
-			case StreamFormat::UTF8:
-				{
-				pWriteAnsi=Utf8Write<CHAR>;
-				pWriteUnicode=Utf8Write<WCHAR>;
-				break;
-				}
-			}
-		}
+	UINT PrintChar(CHAR Char, UINT Count=1);
+	UINT PrintChar(WCHAR Char, UINT Count=1);
+	UINT PrintDouble(DOUBLE Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0, UINT Precision=0);
+	UINT PrintFloat(FLOAT Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0, UINT Precision=0);
+	UINT PrintHex(UINT Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0);
+	UINT PrintHex64(UINT64 Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0);
+	UINT PrintInt(INT Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0);
+	UINT PrintInt64(INT64 Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0);
+	UINT PrintUInt(UINT Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0);
+	UINT PrintUInt64(UINT64 Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0);
+	VOID SetStream(OutputStream* Stream);
 
 private:
 	// Using
@@ -89,28 +64,10 @@ private:
 	typedef UINT (*UNICODE_PROC)(OutputStream* Stream, WCHAR Char);
 
 	// Common
-	template <class _proc_t, class _char_t> UINT DoPrint(_proc_t WriteChar, UINT Length, _char_t const* Value)
-		{
-		if(!Value)
-			return 0;
-		if(Length==0)
-			Length=UINT_MAX;
-		UINT size=0;
-		for(UINT u=0; Value[u]; u++)
-			{
-			if(u==Length)
-				break;
-			size+=WriteChar(pStream, Value[u]);
-			}
-		return size;
-		}
-	template <class _proc_t, class _char_t> UINT DoPrintChar(_proc_t WriteChar, _char_t Char, UINT Count)
-		{
-		UINT size=0;
-		for(UINT u=0; u<Count; u++)
-			size+=WriteChar(pStream, Char);
-		return size;
-		}
+	template <class _func_t, class _char_t> UINT DoPrint(_func_t WriteChar, UINT Length, _char_t const* Value);
+	template <class _char_t> UINT DoPrint(_char_t const* Value, StringFormatFlags Flags, UINT Width);
+	template <class _func_t, class _char_t> UINT DoPrintChar(_func_t WriteChar, _char_t Char, UINT Count);
+
 	OutputStream* pStream;
 	ANSI_PROC pWriteAnsi;
 	UNICODE_PROC pWriteUnicode;
